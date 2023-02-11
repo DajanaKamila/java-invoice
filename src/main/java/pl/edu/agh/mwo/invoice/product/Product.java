@@ -13,7 +13,7 @@ public abstract class Product {
         if (name == null || name.equals("")) {
             throw new IllegalArgumentException("Name is invalid");
         }
-        if (price == null || price.signum() < 0){
+        if (price == null || price.compareTo(BigDecimal.ZERO)==-1){
             throw new IllegalArgumentException("Price is invalid");
         }
         this.name = name;
