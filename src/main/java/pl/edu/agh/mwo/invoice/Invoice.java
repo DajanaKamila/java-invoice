@@ -10,8 +10,10 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
     //private Collection<Product> products ;
     private Map<Product, Integer> products = new HashMap<>();
+    private Set<Product> listOfProducts = products.keySet();
+
     public void addProduct(Product product) {
-        this.products.put(product, null);
+        this.products.put(product, 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
@@ -20,7 +22,7 @@ public class Invoice {
 
     public BigDecimal getNetPrice() {
         BigDecimal netPrice = BigDecimal.ZERO;
-        Set<Product> listOfProducts = products.keySet();
+
         if (!products.isEmpty()){
             for (Product p : listOfProducts){
                netPrice = netPrice.add(p.getPrice().multiply((BigDecimal.valueOf(products.get(p)))));
@@ -34,6 +36,11 @@ public class Invoice {
     }
 
     public BigDecimal getTotal() {
-        return BigDecimal.ZERO;
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        if (!products.isEmpty()) {
+            totalPrice = getNetPrice();
+        }
+
+        return totalPrice;
     }
 }
