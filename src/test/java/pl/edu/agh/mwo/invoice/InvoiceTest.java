@@ -72,7 +72,7 @@ public class InvoiceTest {
         invoice.addProduct(new TaxFreeProduct("Pampersy", new BigDecimal("200")));
         // tax: 8
         invoice.addProduct(new DairyProduct("Kefir", new BigDecimal("100")));
-        // tax: 2.30
+        // tax: 23.0
         invoice.addProduct(new OtherProduct("Piwko", new BigDecimal("10")));
         Assert.assertThat(new BigDecimal("10.30"), Matchers.comparesEqualTo(invoice.getTax()));
     }

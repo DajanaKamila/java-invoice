@@ -32,15 +32,21 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
-        return BigDecimal.ZERO;
+        BigDecimal tax = BigDecimal.ZERO;
+        if (!products.isEmpty()) {
+            for (Product p : listOfProducts){
+                BigDecimal taxToAdd = p.getPriceWithTax().subtract(p.getPrice()).multiply(BigDecimal.valueOf(products.get(p)));
+                tax = tax.add(taxToAdd);
+            }
+        }
+        return tax;
     }
 
     public BigDecimal getTotal() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         if (!products.isEmpty()) {
-            totalPrice = getNetPrice();
+            totalPrice = getNetPrice().add(getTax());
         }
-
         return totalPrice;
     }
 }
