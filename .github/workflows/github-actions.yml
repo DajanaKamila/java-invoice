@@ -26,3 +26,9 @@ jobs:
           distribution: 'adopt'
       - name: Checkstyle
         run: mvn checkstyle:check
+
+    example_matrix:
+      strategy:
+        matrix:
+          version: [ 10, 12, 14 ]
+          os: [ ubuntu-latest, windows-latest ]
