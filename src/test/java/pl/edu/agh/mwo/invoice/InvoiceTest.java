@@ -8,10 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.edu.agh.mwo.invoice.Invoice;
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
 import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+import pl.edu.agh.mwo.invoice.product.DairyProduct;
+
+
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -125,4 +127,30 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+    // Mmay w ogóle numer
+    @Test
+    public void testInvoiceHasNumber(){
+        int number = invoice.getNumber();
+        Assert.assertNotNull(number);
+    }
+
+    // Numer jest większy od zera
+    @Test
+    public void invoiceNumberIsGreaterThan0(){
+        int number = invoice.getNumber();
+        Assert.assertTrue(number>0);
+    }
+
+    // numer zwiększa się za każdym razem
+    @Test
+    public void invoiceNumberGetsLargerInEveryNewInvoice(){
+        Invoice invoice2 = new Invoice();
+        int numberInvoice1 = invoice.getNumber();
+        int numberInvoice2 = invoice2.getNumber();
+        Assert.assertTrue(numberInvoice2 > numberInvoice1);
+    }
+
+
+
 }

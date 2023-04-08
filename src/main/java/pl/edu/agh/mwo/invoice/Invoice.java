@@ -9,6 +9,8 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
+
+
     public void addProduct(Product product) {
         addProduct(product, 1);
     }
