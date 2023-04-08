@@ -150,7 +150,5 @@ public class InvoiceTest {
         int numberInvoice2 = invoice2.getNumber();
         Assert.assertTrue(numberInvoice2 > numberInvoice1);
     }
-
-
-
+    
 }
