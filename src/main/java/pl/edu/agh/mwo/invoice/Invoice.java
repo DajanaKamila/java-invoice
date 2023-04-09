@@ -18,11 +18,10 @@ public class Invoice {
         nextNumber++;
     }
 
-
-
     public void addProduct(Product product) {
-        addProduct(product, 1);
+            addProduct(product, 1);
     }
+
 
     public void addProduct(Product product, Integer quantity) {
         if (product == null || quantity <= 0) {
@@ -56,4 +55,18 @@ public class Invoice {
     public int getNumber() {
         return NUMBER;
     }
+
+    public void printInvoice() {
+        int counter = 0;
+        if (!products.isEmpty()) {
+            System.out.println("Invoice number: " + NUMBER);
+            System.out.println("Name \tQuantity \tPrice");
+            for (Product product : products.keySet()) {
+                System.out.println(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice());
+                counter++;
+            }
+            System.out.println("Number of positions: " + counter);
+        }
+    }
+
 }

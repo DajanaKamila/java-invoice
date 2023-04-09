@@ -128,7 +128,7 @@ public class InvoiceTest {
         invoice.addProduct(null);
     }
 
-    // Mmay w ogóle numer
+    // Mamy w ogóle numer
     @Test
     public void testInvoiceHasNumber(){
         int number = invoice.getNumber();
@@ -137,18 +137,18 @@ public class InvoiceTest {
 
     // Numer jest większy od zera
     @Test
-    public void invoiceNumberIsGreaterThan0(){
+    public void testInvoiceNumberIsGreaterThan0(){
         int number = invoice.getNumber();
         Assert.assertTrue(number>0);
     }
 
     // numer zwiększa się za każdym razem
     @Test
-    public void invoiceNumberGetsLargerInEveryNewInvoice(){
+    public void testInvoiceNumberGetsLargerInEveryNewInvoice(){
         Invoice invoice2 = new Invoice();
         int numberInvoice1 = invoice.getNumber();
         int numberInvoice2 = invoice2.getNumber();
         Assert.assertTrue(numberInvoice2 > numberInvoice1);
     }
-    
+
 }
