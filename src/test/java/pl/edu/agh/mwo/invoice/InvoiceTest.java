@@ -150,5 +150,51 @@ public class InvoiceTest {
         int numberInvoice2 = invoice2.getNumber();
         Assert.assertTrue(numberInvoice2 > numberInvoice1);
     }
+    
+    @Test
+    public void testAddingTwoTheSameProductsMakesProductListLengthOne(){
+        DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
+        invoice.addProduct(product);
+        invoice.addProduct(product);
+        Assert.assertEquals(1, invoice.getProducts().size());
+    }
+
+    @Test
+    public void testAddingTwoTheSameProductsInDifferentQuantityMakesTheListLenghtOne(){
+        DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
+        invoice.addProduct(product,3);
+        invoice.addProduct(product,5);
+        Assert.assertEquals(1, invoice.getProducts().size());
+    }
+
+    @Test
+    public void testAddingFourProducts2DifferntTypesMakesListLengthTwo(){
+        DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
+        TaxFreeProduct product2 = new TaxFreeProduct("Fuel", new BigDecimal(10));
+        invoice.addProduct(product);
+        invoice.addProduct(product);
+        invoice.addProduct(product2);
+        invoice.addProduct(product2);
+        Assert.assertEquals(1, invoice.getProducts().size());
+    }
+
+    @Test
+    public void testAddingTwoTheSameProductsChangeQuantityOfTwo() {
+        DairyProduct product = new DairyProduct("Butter", new BigDecimal("6.00"));
+        invoice.addProduct(product);
+        invoice.addProduct(product);
+        Assert.assertEquals(2, invoice.getProducts().get(product));
+    }
+
+    @Test
+    public void testAddingTwoTheSameProductsInQuantityOfThreeAndFiveChangeQuantityOfEight() {
+        DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
+        TaxFreeProduct product2 = new TaxFreeProduct("Fuel", new BigDecimal(10));
+        invoice.addProduct(product, 3);
+        invoice.addProduct(product2, 5);
+        int result = invoice.getProducts().get(product) + invoice.getProducts().get(product2);
+        Assert.assertEquals(8, result);
+    }
+
 
 }
