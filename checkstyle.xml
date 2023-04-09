@@ -24,6 +24,7 @@ but without javadoc requirements and with severity set to error.
     </module>
 
     <module name="TreeWalker">
+        <module name="MagicNumber"/>
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
@@ -156,11 +157,6 @@ but without javadoc requirements and with severity set to error.
             <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
             <message key="name.invalidPattern"
                      value="Member name ''{0}'' must match pattern ''{1}''."/>
-            <property name="allowUnderscore" value="true"/>
-            <property name="maxNameLength" value="30"/>
-            <property name="ignoreFinal" value="true"/>
-            <property name="ignoreStatic" value="true"/>
-            <property name="maxConsecutiveCapitalLetters" value="3"/>
         </module>
         <module name="ParameterName">
             <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
@@ -219,7 +215,6 @@ but without javadoc requirements and with severity set to error.
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
             <property name="allowedAbbreviationLength" value="2"/>
-            <property name="maxConsecutiveCapitalLetters" value="3"/>
             <property name="tokens"
                       value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF,
                     PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF"/>

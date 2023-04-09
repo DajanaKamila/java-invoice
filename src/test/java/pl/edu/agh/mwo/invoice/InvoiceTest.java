@@ -1,5 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,6 +16,8 @@ import pl.edu.agh.mwo.invoice.product.*;
 
 public class InvoiceTest {
     private Invoice invoice;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Before
     public void createEmptyInvoiceForTheTest() {
@@ -132,20 +136,43 @@ public class InvoiceTest {
         Assert.assertNotNull(number);
     }
 
-    // Numer jest większy od zera
+
     @Test
     public void testInvoiceNumberIsGreaterThan0(){
         int number = invoice.getNumber();
         Assert.assertTrue(number>0);
     }
 
-    // numer zwiększa się za każdym razem
+
     @Test
     public void testInvoiceNumberGetsLargerInEveryNewInvoice(){
         Invoice invoice2 = new Invoice();
         int numberInvoice1 = invoice.getNumber();
         int numberInvoice2 = invoice2.getNumber();
         Assert.assertTrue(numberInvoice2 > numberInvoice1);
+    }
+
+    @Test
+    public void testPrintInvoiceWithEmptyProducts() {
+        System.setOut(new PrintStream(outContent));
+        String expectedOutput = "";
+        invoice.printInvoice();
+        String actualOutput = outContent.toString();
+        Assert.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void testPrintInvoiceWithOneProduct() {
+        System.setOut(new PrintStream(outContent));
+        DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
+        invoice.addProduct(product);
+        String expectedOutput = "Invoice number: 10000\n" +
+                "Name \tQuantity \tPrice\n" +
+                "Milk\t1\t3.5\n" +
+                "Number of positions: 1";
+        invoice.printInvoice();
+        String actualOutput = outContent.toString();
+        Assert.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test

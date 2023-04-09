@@ -69,13 +69,13 @@ public class Invoice {
     public void printInvoice() {
         int counter = 0;
         if (!products.isEmpty()) {
-            System.out.println("Invoice number: " + NUMBER);
-            System.out.println("Name \tQuantity \tPrice");
+            System.out.print("Invoice number: " + NUMBER + "\n");
+            System.out.print("Name \tQuantity \tPrice\n");
             for (Product product : products.keySet()) {
-                System.out.println(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice());
+                System.out.print(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice()+"\n");
                 counter++;
             }
-            System.out.println("Number of positions: " + counter);
+            System.out.print("Number of positions: " + counter);
         }
     }
 
