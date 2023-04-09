@@ -166,7 +166,7 @@ public class InvoiceTest {
         System.setOut(new PrintStream(outContent));
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
         invoice.addProduct(product);
-        String expectedOutput = "Invoice number: 0\n" +
+        String expectedOutput = "Invoice number: " + invoice.getNumber() + "\n" +
                 "Name \tQuantity \tPrice\n" +
                 "Milk\t1\t3.5\n" +
                 "Number of positions: 1";
@@ -224,15 +224,15 @@ public class InvoiceTest {
 
     @Test
     public void testBottleOfWineCostsHaveAdditionalTaxIncluded() {
-        BottleOfWine bottleOfWine = new BottleOfWine("Antares", new BigDecimal(10.00));
+        BottleOfWine bottleOfWine = new BottleOfWine("Antares", new BigDecimal(10.00), new BigDecimal(5.56));
         invoice.addProduct(bottleOfWine);
         Assert.assertThat(new BigDecimal("17.86"), Matchers.comparesEqualTo(invoice.getGrossTotal()
                 .setScale(2, RoundingMode.HALF_UP)));
     }
 
     @Test
-    public void testFuealCanisterCostsHaveAdditionalTaxIncludedButNoNormalTax() {
-        FuelCanister fuelCanister = new FuelCanister("ON 95", new BigDecimal(10.00));
+    public void testFuelCanisterCostsHaveAdditionalTaxIncludedButNoNormalTax() {
+        FuelCanister fuelCanister = new FuelCanister("ON 95", new BigDecimal(10.00), new BigDecimal(5.56));
         invoice.addProduct(fuelCanister);
         Assert.assertThat(new BigDecimal("15.56"), Matchers.comparesEqualTo(invoice.getGrossTotal()
                 .setScale(2, RoundingMode.HALF_UP)));

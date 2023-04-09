@@ -2,15 +2,9 @@ package pl.edu.agh.mwo.invoice.product;
 
 import java.math.BigDecimal;
 
-public class BottleOfWine extends OtherProduct {
-
-    public BottleOfWine(String name, BigDecimal price) {
-        super(name, price);
+public class BottleOfWine extends Product {
+    public BottleOfWine(String name, BigDecimal price, BigDecimal extraTax) {
+        super(name, price, new BigDecimal("0.23"), extraTax);
     }
 
-    @Override
-    public BigDecimal getPriceWithTax() {
-        BigDecimal fullPrice = getPrice().multiply(getTaxPercent()).add(getPrice()).add(getExtraTax());
-        return fullPrice;
-    }
 }

@@ -61,7 +61,7 @@ public class Invoice {
         BigDecimal totalGross = BigDecimal.ZERO;
         for (Product product : products.keySet()) {
             BigDecimal quantity = new BigDecimal(products.get(product));
-            totalGross = totalGross.add(product.getPriceWithTax().multiply(quantity));
+            totalGross = totalGross.add(product.getPriceWithTax().multiply(quantity).add(product.getExtraTax()));
         }
         return totalGross;
     }
