@@ -38,6 +38,9 @@ but without javadoc requirements and with severity set to error.
             <property name="allowByTailComment" value="true"/>
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
+        <module name="AbbreviationAsWordInNameCheck">
+            <property name="allowedAbbreviationLength" value="12"/>
+        </module>
         <module name="AvoidStarImport"/>
         <module name="OneTopLevelClass"/>
         <module name="NoLineWrap">

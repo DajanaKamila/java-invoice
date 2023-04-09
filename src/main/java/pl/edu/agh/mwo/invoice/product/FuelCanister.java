@@ -4,14 +4,13 @@ import java.math.BigDecimal;
 
 public class FuelCanister extends TaxFreeProduct {
 
-
     public FuelCanister(String name, BigDecimal price) {
         super(name, price);
     }
 
     @Override
-    public BigDecimal getPriceWithTax(){
-        BigDecimal fullPrice = getPrice().add(new BigDecimal(5.56));
+    public BigDecimal getPriceWithTax() {
+        BigDecimal fullPrice = getPrice().add(getExtraTax());
         return fullPrice;
     }
 }

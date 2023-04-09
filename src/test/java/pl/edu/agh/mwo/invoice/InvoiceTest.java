@@ -131,21 +131,21 @@ public class InvoiceTest {
 
     // Mamy w ogóle numer
     @Test
-    public void testInvoiceHasNumber(){
+    public void testInvoiceHasNumber() {
         int number = invoice.getNumber();
         Assert.assertNotNull(number);
     }
 
 
     @Test
-    public void testInvoiceNumberIsGreaterThan0(){
+    public void testInvoiceNumberIsGreaterThan0() {
         int number = invoice.getNumber();
-        Assert.assertTrue(number>0);
+        Assert.assertTrue(number > 0);
     }
 
 
     @Test
-    public void testInvoiceNumberGetsLargerInEveryNewInvoice(){
+    public void testInvoiceNumberGetsLargerInEveryNewInvoice() {
         Invoice invoice2 = new Invoice();
         int numberInvoice1 = invoice.getNumber();
         int numberInvoice2 = invoice2.getNumber();
@@ -166,7 +166,7 @@ public class InvoiceTest {
         System.setOut(new PrintStream(outContent));
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
         invoice.addProduct(product);
-        String expectedOutput = "Invoice number: 10000\n" +
+        String expectedOutput = "Invoice number: 0\n" +
                 "Name \tQuantity \tPrice\n" +
                 "Milk\t1\t3.5\n" +
                 "Number of positions: 1";
@@ -176,7 +176,7 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testAddingTwoTheSameProductsMakesProductListLengthOne(){
+    public void testAddingTwoTheSameProductsMakesProductListLengthOne() {
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
         invoice.addProduct(product);
         invoice.addProduct(product);
@@ -184,15 +184,15 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testAddingTwoTheSameProductsInDifferentQuantityMakesTheListLenghtOne(){
+    public void testAddingTwoTheSameProductsInDifferentQuantityMakesTheListLenghtOne() {
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
-        invoice.addProduct(product,3);
-        invoice.addProduct(product,5);
+        invoice.addProduct(product, 3);
+        invoice.addProduct(product, 5);
         Assert.assertEquals(1, invoice.getProducts().size());
     }
 
     @Test
-    public void testAddingFourProducts2DifferntTypesMakesListLengthTwo(){
+    public void testAddingFourProducts2DifferntTypesMakesListLengthTwo() {
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
         TaxFreeProduct product2 = new TaxFreeProduct("Fuel", new BigDecimal(10));
         invoice.addProduct(product);

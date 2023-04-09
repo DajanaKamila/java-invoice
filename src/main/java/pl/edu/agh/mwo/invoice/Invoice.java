@@ -9,13 +9,13 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
-    private final int NUMBER;
-    private static int nextNumber = 10000;
+    private int number = 0;
+    private static int nextNumber = 0;
 
 
-    public Invoice(){
+    public Invoice() {
         super();
-        NUMBER = nextNumber;
+        number = nextNumber;
         nextNumber++;
     }
 
@@ -69,10 +69,10 @@ public class Invoice {
     public void printInvoice() {
         int counter = 0;
         if (!products.isEmpty()) {
-            System.out.print("Invoice number: " + NUMBER + "\n");
+            System.out.print("Invoice number: " + number + "\n");
             System.out.print("Name \tQuantity \tPrice\n");
             for (Product product : products.keySet()) {
-                System.out.print(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice()+"\n");
+                System.out.print(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice() + "\n");
                 counter++;
             }
             System.out.print("Number of positions: " + counter);
@@ -80,8 +80,9 @@ public class Invoice {
     }
 
     public int getNumber() {
-        return NUMBER;
+        return number;
     }
+
     public Map<Product, Integer> getProducts() {
         return products;
     }
