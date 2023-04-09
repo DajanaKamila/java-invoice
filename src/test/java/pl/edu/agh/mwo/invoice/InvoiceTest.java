@@ -150,7 +150,7 @@ public class InvoiceTest {
         int numberInvoice2 = invoice2.getNumber();
         Assert.assertTrue(numberInvoice2 > numberInvoice1);
     }
-    
+
     @Test
     public void testAddingTwoTheSameProductsMakesProductListLengthOne(){
         DairyProduct product = new DairyProduct("Milk", new BigDecimal(3.5));
@@ -175,7 +175,7 @@ public class InvoiceTest {
         invoice.addProduct(product);
         invoice.addProduct(product2);
         invoice.addProduct(product2);
-        Assert.assertEquals(1, invoice.getProducts().size());
+        Assert.assertEquals(2, invoice.getProducts().keySet().size());
     }
 
     @Test
@@ -183,7 +183,8 @@ public class InvoiceTest {
         DairyProduct product = new DairyProduct("Butter", new BigDecimal("6.00"));
         invoice.addProduct(product);
         invoice.addProduct(product);
-        Assert.assertEquals(2, invoice.getProducts().get(product));
+        int result = invoice.getProducts().get(product);
+        Assert.assertEquals(2, result);
     }
 
     @Test

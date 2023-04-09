@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,13 @@ public class Invoice {
     }
 
     public void addProduct(Product product) {
+        if (!products.keySet().contains(product)) {
             addProduct(product, 1);
+        } else {
+            int quantity = products.get(product);
+            quantity++;
+            products.put(product, quantity);
+        }
     }
 
 
@@ -27,7 +34,14 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        products.put(product, quantity);
+        if (!products.keySet().contains(product)) {
+            products.put(product, quantity);
+        } else {
+            int currentQuantity = products.get(product);
+            currentQuantity += quantity;
+            products.put(product, currentQuantity);
+        }
+
     }
 
     public BigDecimal getNetTotal() {
@@ -52,10 +66,6 @@ public class Invoice {
         return totalGross;
     }
 
-    public int getNumber() {
-        return NUMBER;
-    }
-
     public void printInvoice() {
         int counter = 0;
         if (!products.isEmpty()) {
@@ -69,4 +79,10 @@ public class Invoice {
         }
     }
 
+    public int getNumber() {
+        return NUMBER;
+    }
+    public Map<Product, Integer> getProducts() {
+        return products;
+    }
 }
