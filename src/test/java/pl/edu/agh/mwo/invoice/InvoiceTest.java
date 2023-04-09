@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -8,11 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.edu.agh.mwo.invoice.Invoice;
-import pl.edu.agh.mwo.invoice.product.OtherProduct;
-import pl.edu.agh.mwo.invoice.product.Product;
-import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
-
+import pl.edu.agh.mwo.invoice.product.*;
 
 
 public class InvoiceTest {
@@ -202,16 +199,18 @@ public class InvoiceTest {
     public void testBottleOfWineCostsHaveAdditionalTaxIncluded() {
         BottleOfWine bottleOfWine = new BottleOfWine("Antares", new BigDecimal(10.00));
         invoice.addProduct(bottleOfWine);
-        Assert.assertEquals(17.86, invoice.getGrossTotal());
+        Assert.assertThat(new BigDecimal("17.86"), Matchers.comparesEqualTo(invoice.getGrossTotal()
+                .setScale(2, RoundingMode.HALF_UP)));
     }
 
     @Test
     public void testFuealCanisterCostsHaveAdditionalTaxIncludedButNoNormalTax() {
-        FuelCanister fuelCanister = new FuelCanister(new BigDecimal(10.00));
-        invoice.addProduct(fuealCanister);
-        Assert.assertEquals(15.56, invoice.getGrossTotal());
+        FuelCanister fuelCanister = new FuelCanister("ON 95", new BigDecimal(10.00));
+        invoice.addProduct(fuelCanister);
+        Assert.assertThat(new BigDecimal("15.56"), Matchers.comparesEqualTo(invoice.getGrossTotal()
+                .setScale(2, RoundingMode.HALF_UP)));
 
     }
-    
+
 
 }
