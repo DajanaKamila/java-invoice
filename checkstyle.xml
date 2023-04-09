@@ -25,7 +25,6 @@ but without javadoc requirements and with severity set to error.
 
     <module name="TreeWalker">
         <module name="MagicNumber">
-            <property name="ignoreNumbers" value="true"/>
             <property name="tokens" value="NUM_INT_LITERAL"/>
         </module>
         <module name="OuterTypeFilename"/>

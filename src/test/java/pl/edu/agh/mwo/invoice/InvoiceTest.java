@@ -198,4 +198,20 @@ public class InvoiceTest {
     }
 
 
+    @Test
+    public void testBottleOfWineCostsHaveAdditionalTaxIncluded() {
+        BottleOfWine bottleOfWine = new BottleOfWine("Antares", new BigDecimal(10.00));
+        invoice.addProduct(bottleOfWine);
+        Assert.assertEquals(17.86, invoice.getGrossTotal());
+    }
+
+    @Test
+    public void testFuealCanisterCostsHaveAdditionalTaxIncludedButNoNormalTax() {
+        FuelCanister fuelCanister = new FuelCanister(new BigDecimal(10.00));
+        invoice.addProduct(fuealCanister);
+        Assert.assertEquals(15.56, invoice.getGrossTotal());
+
+    }
+    
+
 }
